@@ -1,0 +1,44 @@
+
+ <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="{% url 'index' %}">YB Blog</a> > <!-- burdaki {&  &} etiketinin icerisne url yazip gitmek istedigimiz url ismini(daha once tanimladigimiz'urls.py' yaziyoruz ve dinamik hale getiriyoruz.)-->
+      
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'about' %}">HAKKIMDA</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'article:articles' %}">Makaleler</a> <!-- burdaki dinamik url ise article dosyasindaki url dosyasinda oldugu icin article dosyasidnaki articles name ine git diyoruz.-->
+          </li>
+        </ul>
+        
+        <ul class ="navbar-nav ml-auto">
+          
+          
+          {% if request.user.is_authenticated %}                                  <!--  BURDA BI KOSULLU DURUM ACARAK EGER GIRIS YAPILDIYSA SADECE CIKIS YAP KONTORL PANELI GORUNECEK. GIRIS YOK ISE KAYIT OL VE GIRIS YAP GORUNECEK.-->
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'article:dashboard' %}">Kontrol Paneli</a>
+          </li>
+          
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'user:logout' %}">Cikis Yap</a>
+          </li>
+          {% else %}
+
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'user:login' %}">Giris Yap</a>
+          </li>
+
+          {% endif %}
+
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'user:register' %}">Kayit Ol</a>
+          </li>
+          </ul>  
+        
+        </form>
+      </div>
+    </nav>

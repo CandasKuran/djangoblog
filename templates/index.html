@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+<div class="jumbotron text-center">
+
+    <h3>Evrim'in Bloguna Hosgeldiniz</h3>
+    <p>Bu blogta blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla</p>  
+</div>
+
+
+<p>
+        
+    {% if request.user.is_authenticated %}
+            Giris Yapilmis,{{request.user.username}}
+    {% else %}
+            Giris Yapilmamis
+    {% endif %}
+
+</p>
+
+
+{% endblock body %}
+

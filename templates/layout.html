@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}    <!-- bunu ekleyerek kullandigimiz static dosya yolunu direk bulmasini sagliyoruz.,-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <title>YbBlog</title>
+</head>
+<body>
+    
+    {% include "includes/navbar.html" %}
+    
+
+
+
+    <div style = "margin-top: 100px; margin-bottom:100px;" class = "container">  <!-- style = "margin-top: 100px;" ile sayfain ust kismindan 100pixel margin birakmasini yazdik-->
+            {% if messages %}                               <!-- burda mesaj yazdirmak istedigimiz yeri secip hazir kismi ekliyoruz,-->
+            
+                    {% for message in messages %}
+                    {% if message.tags == "info" %}
+                    <div class="alert alert-danger">{{ message }}</div> <!-- eger msj secimimiz info olursa biz bunu alert olarak sec ve yap diyoruz,eger info disinda ise else durumuna girecek ve alttaki else durumu devreye girecek-->
+              
+                    {% else %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>   <!-- burayi div icine alip classimizi alert alert- secip msjimizi alert oldugunu soyluzoru. eger istedigimiz ve yazdigimiz msj succes ise alert alertin sonunda succes gelecek-->
+                    {% endif %}
+
+              
+                    {% endfor %}
+            
+            {% endif %}
+        {% block body %}
+          
+        {% endblock body %}
+
+
+
+
+    </div>
+
+
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>          <!-- bu dosyalari bilgisayara indirip static dosyasi icine tanimladik ve direk klasor icinden kullaniyoruz,.-->
+        <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>       <!-- bu ve 8. satir gibi-->
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>  <!-- burda code prettify ekliyoruz. sitemizin icerisinde bir kod paylastigimiz zaman otomatik olarak renklenecek kodlar.-->
+</body>
+</html>
+
+
+
+<!-- kod snippets eklemek icin (46.satir)
+
+https://github.com/googlearchive/code-prettify
+makale icinde kullanmak ici;
+
+<pre class="prettyprint">
+
+renklendirmek istedigimiz kod,
+
+</pre>
+
+-->

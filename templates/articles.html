@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class = "row" >
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+        <h3>Makaleler</h3>
+        <hr>
+        <form> 
+            {% csrf_token %}
+            <input type="text" name = "keyword" class=" input-sm" maxlength="64" placeholder="Ara...">
+            <button type="submit" class="btn btn-danger">Ara</button>
+            
+            </form>
+    
+        </div>
+        </div>
+</div>
+
+
+<div class = "row">
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+        </div>
+        </div>
+</div>
+
+
+
+{% if articles %}
+
+{% for article in articles %}
+    <div class="row">
+    <div class="col-md-10 offset-md-3">   <!-- Makaleleri ortalamamizi sagliyor-->
+
+<!-- Post Content Column -->
+    <div class="col-lg-8">
+
+<!-- Title -->
+    <a href="{% url 'article:detail' article.id %}"><h2 class="mt-4">{{article.title}}</h2></a>   <!-- burda a linki olusturup basligimizi bunun icine aliyoruz. ve tikladigimiz zaman detail sayfasina yani makaleye gitmesine sagliyoruz.-->
+
+<!-- Author -->
+      <p class="lead">
+        
+        {{article.author.username}} tarafindan yayinlandi
+      </p>
+
+      <hr>
+<!-- Date/Time -->
+      <p>{{article.created_date}}</p>
+<!-- Preview Image -->
+{% if article.article_image %}
+<img class="img-fluid rounded" src="{{article.article_image.url}}" alt="">  
+
+{% endif %}
+
+
+      <hr>
+
+<!-- Post Content -->
+      <p class="lead">
+            {{article.content|safe|truncatewords:50}}        <!-- bu ekledigimiz filter "|safe" html sayfasi gibi gostermemizi sagliyor., truncatewords ise makalemizin gosterilmes sayfasinda sadece 50 kelimesini goster gerisine tiklayinca okuyabilsin ozelligi ekliyoruz. (yani devamini oku ) -->
+      </p>
+
+      <a  style = "float :right; "href="{% url 'article:detail' article.id %}" class =  "btn btn-danger">Devamini Oku</a> <!-- style = "float :right; bunu ekledigimiz zaman sayfanin sagina koymasini soyluyoruz.-->
+        <hr>
+    </div>
+   </div>
+   </div>
+
+
+{% endfor %}
+
+{% else %}
+
+
+<div class = "row">
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+        
+
+<div class = "alert alert-danger">
+Makale Bulunamadi
+</div>
+</div>
+</div>
+</div>
+{% endif %}
+
+
+  
+{% endblock body %}
+
+
+

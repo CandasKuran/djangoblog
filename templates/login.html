@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% load crispy_forms_tags %}       <!-- burda crispy_filter i kullanmak istedigimiz icin dahil ediyoruz.-->
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+        <h3> Giris Yap</h3>
+        <hr>
+  
+<form method = "POST">
+    {% csrf_token %}
+    {{form|crispy}}           <!-- burda biz form olarak asagida ekledigimiz crispy formunu kullanmak istedigimizi soyluyoruz.-->
+    <br>
+    <button type = "submit" class ="btn btn-danger" >Giris Yap</button>
+
+
+
+</form>
+
+
+  </div>
+</div>
+
+
+{% endblock body %}
+
+
+
+
+
+
+<!-- sayfayi formunu ayarlamak icin bootstrap 4 grids ozelliklerini kullanabiliriz.
+
+ornegin;
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">.col-md-6 .offset-md-3</div>
+</div>
+
+boyle bir form secip ".col-md-6 .offset-md-3 " yerine sayfamizda bu forma sokmak istedigimiz kismi ekliyoruz.
+
+https://getbootstrap.com/docs/4.0/layout/grid/
+
+
+
+
+
+django crispy formlarini eklemekmiz icin disardan bir django modulu indirip eklememiz gerekiyor.
+
+https://django-crispy-forms.readthedocs.io/en/latest/install.html
+
+terminalde pip insall ile indirdikten sonra bizim settings.py de ki istalled apps kismina bunu eklememiz gerekiyor.
+
+    'crispy_forms',
+
+daha sonra biz uni_form degilde bootstrap4 kullanacagimiz icin settings.py de en altta bunu ekliyoruz.
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+
+son olarak ayni sitedeki crispy_filter kisminda bu filteri nasil kullanacagimizi gorebiliriz.
+
+{% load crispy_forms_tags %} kullanmak istedigimiz temlatesin en ust kismina bunu ekliyoruz.
+-->
